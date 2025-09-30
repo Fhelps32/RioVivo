@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Calendar,
+  House,
+  BookOpenText,
   ChevronDown,
   ChevronUp,
-  Home,
-  Info,
-  Store,
+  ShoppingBag,
+  FileText,
+  Recycle,
 } from "lucide-react";
 
 export default function Header() {
@@ -71,17 +72,17 @@ export default function Header() {
             onClick={() => setMenuOpen(false)}
             className="flex items-center gap-3 hover:text-lime-400"
           >
-            <Home size={20} /> Home
+            <House size={20} /> Home
           </Link>
 
-          {/* Eventos + Submenu */}
+          {/* Blogs + Submenu */}
           <div>
             <button
               onClick={() => setSubmenuOpen(!submenuOpen)}
               className="flex items-center justify-between w-full hover:text-lime-400"
             >
               <span className="flex items-center gap-3">
-                <Calendar size={20} /> Blogs
+                <BookOpenText size={20} /> Blogs
               </span>
               {submenuOpen ? (
                 <ChevronUp size={18} />
@@ -120,29 +121,31 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Sobre */}
+          {/* Loja Sustentável */}
           <Link
             to="/loja"
             onClick={() => setMenuOpen(false)}
             className="flex items-center gap-3 hover:text-lime-400"
           >
-            <Store size={20} /> Loja Sustentável
+            <ShoppingBag size={20} /> Loja Sustentável
           </Link>
 
+          {/* Informações Adicionais */}
           <Link
             to="/info"
             onClick={() => setMenuOpen(false)}
             className="flex items-center gap-3 hover:text-lime-400"
           >
-            <Info size={20} /> Informações Adicionais
+            <FileText size={20} /> Informações Adicionais
           </Link>
 
+          {/* Cadastro de Reuso */}
           <Link
             to="/reuso"
             onClick={() => setMenuOpen(false)}
             className="flex items-center gap-3 hover:text-lime-400"
           >
-            <Info size={20} /> Cadastro de Reuso
+            <Recycle size={20} /> Cadastro de Reuso
           </Link>
         </div>
       </div>
