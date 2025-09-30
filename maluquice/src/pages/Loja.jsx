@@ -1,16 +1,25 @@
 import { useState } from "react";
 import { ShoppingCart, Plus, Minus } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Loja() {
   const [quantities, setQuantities] = useState([0, 0, 0]);
+  const [novoProduto, setNovoProduto] = useState({
+    nome: "",
+    preco: "",
+    descricao: "",
+    imagem: "",
+  });
+
+  const navigate = useNavigate();
 
   const produtos = [
     {
       id: 1,
-      nome: "Copos Ecolõgicos",
+      nome: "Copos Ecológicos",
       preco: "R$ 20,00",
       descricao:
-        "Nossos copos ecológicos são feitos de materiais recicláveis e são uma excelente alternativa aos copos plásticos. Perfeitos para festas ou uso diário, eles ajudam a reduzir o lixo plástico e são fáceis de transportar, mantendo sua bebida favorita sempre à mão.",
+        "Nossos copos ecológicos são feitos de materiais recicláveis e são uma excelente alternativa aos copos plásticos.",
       imagem: "/images/copo.png",
     },
     {
@@ -18,7 +27,7 @@ export default function Loja() {
       nome: "Sacola Reutilizável",
       preco: "R$ 35,00",
       descricao:
-        "Feita de material reciclado, esta sacola é perfeita para substituir as sacolas plásticas. Com um design resistente e leve, ela pode ser utilizada em diversas ocasiões, promovendo a redução de resíduos. Além de ser prática, ela ajuda a preservar o meio ambiente.",
+        "Feita de material reciclado, esta sacola é perfeita para substituir as sacolas plásticas.",
       imagem: "/images/bolsa.png",
     },
     {
@@ -26,7 +35,7 @@ export default function Loja() {
       nome: "Canudo de Aço Inoxidável",
       preco: "R$ 35,00",
       descricao:
-        "Diga adeus aos canudos descartáveis! Este canudo de aço inoxidável é durável e fácil de limpar, sendo ideal para bebidas quentes e frias. Com um design elegante, ele é perfeito para quem busca um estilo de vida mais sustentável.",
+        "Este canudo de aço inoxidável é durável e fácil de limpar, ideal para bebidas quentes e frias.",
       imagem: "/images/canudo.png",
     },
   ];
@@ -37,6 +46,27 @@ export default function Loja() {
       newQuantities[index] = Math.max(0, newQuantities[index] + delta);
       return newQuantities;
     });
+  };
+
+  const handleChange = (e) => {
+    setNovoProduto({ ...novoProduto, [e.target.name]: e.target.value });
+  };
+
+  const handleCadastrar = (e) => {
+    e.preventDefault();
+    console.log("Produto cadastrado:", novoProduto);
+    alert(`Produto "${novoProduto.nome}" cadastrado com sucesso!`);
+
+    // limpa os campos
+    setNovoProduto({ nome: "", preco: "", descricao: "", imagem: "" });
+  };
+
+  const handleAddCarrinho = (index) => {
+    if (quantities[index] === 32) {
+      navigate("/Caras");         
+    } else {
+      alert(`Adicionado ${quantities[index]}x ${produtos[index].nome} ao carrinho!`);
+    }
   };
 
   return (
@@ -88,13 +118,17 @@ export default function Loja() {
                         <Plus className="w-5 h-5" />
                       </button>
                     </div>
-                    <button className="flex items-center gap-2 bg-lime-700 hover:bg-lime-800 text-white px-6 py-3 rounded-lg transition">
+                    <button
+                      onClick={() => handleAddCarrinho(index)}
+                      className="flex items-center gap-2 bg-lime-700 hover:bg-lime-800 text-white px-6 py-3 rounded-lg transition"
+                    >
                       <ShoppingCart className="w-5 h-5" /> Adicionar no Carrinho
                     </button>
                   </div>
                 </div>
               </div>
             ))}
+
             {/* Card de aviso "Novos produtos em breve" */}
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:scale-105 transition-transform flex flex-col">
               <img
@@ -119,6 +153,63 @@ export default function Loja() {
             <button className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-4 rounded-xl transition text-lg shadow-lg">
               Finalizar Compra
             </button>
+          </div>
+
+          {/* Área de Cadastro de Produto */}
+          <div className="mt-20 bg-white p-8 rounded-2xl shadow-lg text-gray-800">
+            <h2 className="text-2xl font-bold mb-6">Cadastrar Novo Produto</h2>
+            <form onSubmit={handleCadastrar} className="space-y-6">
+              <div>
+                <label className="block mb-2 font-semibold">Nome</label>
+                <input
+                  type="text"
+                  name="nome"
+                  value={novoProduto.nome}
+                  onChange={handleChange}
+                  placeholder="Nome do produto"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-lime-500"
+                />
+              </div>
+              <div>
+                <label className="block mb-2 font-semibold">Preço</label>
+                <input
+                  type="text"
+                  name="preco"
+                  value={novoProduto.preco}
+                  onChange={handleChange}
+                  placeholder="R$ 0,00"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-lime-500"
+                />
+              </div>
+              <div>
+                <label className="block mb-2 font-semibold">Descrição</label>
+                <textarea
+                  name="descricao"
+                  value={novoProduto.descricao}
+                  onChange={handleChange}
+                  placeholder="Descrição do produto"
+                  rows="3"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-lime-500"
+                />
+              </div>
+              <div>
+                <label className="block mb-2 font-semibold">Imagem (URL)</label>
+                <input
+                  type="text"
+                  name="imagem"
+                  value={novoProduto.imagem}
+                  onChange={handleChange}
+                  placeholder="/images/arquivo.png"
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-lime-500"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-lime-700 hover:bg-lime-800 text-white font-semibold py-3 rounded-lg transition"
+              >
+                Cadastrar Produto
+              </button>
+            </form>
           </div>
         </div>
       </section>

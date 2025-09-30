@@ -136,6 +136,14 @@ export default function Header() {
           >
             <Info size={20} /> Informações Adicionais
           </Link>
+
+          <Link
+            to="/reuso"
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center gap-3 hover:text-lime-400"
+          >
+            <Info size={20} /> Cadastro de Reuso
+          </Link>
         </div>
       </div>
     </header>

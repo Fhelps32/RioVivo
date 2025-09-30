@@ -39,11 +39,11 @@ export default function Sobre() {
             />
             <div className="p-6">
               <p className="italic text-gray-700">
-                "A Rio Vivo mudou a forma como lidamos com o lixo. Hoje
-                reciclamos muito mais!"
+                "A Rio Vivo mudou a forma como lido com o lixo. Hoje
+                reciclam muito mais com meus artesanatos!"
               </p>
               <span className="block mt-4 font-semibold text-lime-800">
-                — João Silva
+                — Antonella Braga
               </span>
             </div>
           </div>
@@ -130,8 +130,8 @@ export default function Sobre() {
                 <MapPin className="text-lime-700" /> Nossa sede
               </h3>
               <p className="text-gray-700 leading-relaxed">
-                Rua das Palmeiras, 123 <br />
-                Centro — São Paulo/SP <br />
+                Rua vinte e um, 102 <br />
+                vila santa cécilia — Volta Redonda/RJ <br />
                 CEP: 01234-567
               </p>
 
