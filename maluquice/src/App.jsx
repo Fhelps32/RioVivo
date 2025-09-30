@@ -7,6 +7,7 @@ import BlogArvore from "./pages/BlogArvore";
 import BlogMultirao from "./pages/BlogMultirao";
 import BlogCampanha from "./pages/BlogCampanha";
 import AgendarColeta from "./pages/Coleta";
+import Educacao from "./pages/Educacao";
 import "./App.css";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/blog/multirao" element={<BlogMultirao />} />
           <Route path="/blog/campanha" element={<BlogCampanha />} />
           <Route path="/coleta" element={<AgendarColeta />} />
+          <Route path="/educacao" element={<Educacao />} />
         </Routes>
       </main>
     </div>
